@@ -1,0 +1,50 @@
+/* MAIN ARROWS */
+::ng-deep .custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  height: 44px;
+  width: 44px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+::ng-deep .custom-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+::ng-deep .left-arrow {
+  left: 12px;
+}
+
+::ng-deep .right-arrow {
+  right: 12px;
+}
+
+/* hide default slick arrows */
+::ng-deep .slick-prev:before,
+::ng-deep .slick-next:before {
+  display: none;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shine {
+  animation: shine 2.5s infinite;
+}
+

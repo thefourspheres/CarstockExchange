@@ -1,0 +1,87 @@
+<!-- TITLE WRAPPER -->
+<div class="relative flex items-center justify-center">
+
+  <!-- TITLE -->
+  <h2
+    mat-dialog-title
+    class="w-full text-center font-semibold text-lg sm:text-xl"
+  >
+    Let us help you with your car
+  </h2>
+
+  <!-- CLOSE BUTTON -->
+  <button
+    mat-dialog-close
+    class="absolute right-5 top-[55%] -translate-y-1/2
+           text-gray-400 hover:text-black transition text-xl"
+    aria-label="Close dialog"
+  >
+    ✕
+  </button>
+
+</div>
+
+<!-- SUBTITLE -->
+<p class="text-sm text-gray-500 text-center px-2 sm:px-6 ">
+    Share your details and our team will get in touch to guide you through selling,
+    buying, exchange or servicing your car. We'll get in touch with you within 24 hours.
+</p>
+
+<!-- CONTENT -->
+<mat-dialog-content class="mt-6 space-y-5">
+
+    <!-- NAME -->
+    <div>
+        <label class="text-sm font-medium text-gray-600">Name*</label>
+        <input type="text" placeholder="Enter Your Name" class="mt-1 w-full rounded-full border border-gray-300 px-4 py-3 text-sm
+             focus:outline-none focus:ring-2 focus:ring-yellow-400 bg-gray-100" />
+    </div>
+
+    <!-- MOBILE -->
+    <div>
+        <label class="text-sm font-medium text-gray-600">Mobile Number*</label>
+
+        <div class="mt-1 flex items-center rounded-full border border-gray-300 px-3 py-3
+             focus-within:ring-2 focus-within:ring-yellow-400 bg-gray-100">
+
+            <span class="text-gray-500 text-sm pr-2 border-r">+91</span>
+
+            <input type="tel" placeholder="Enter Mobile Number" class="ml-2 w-full text-sm outline-none bg-gray-100" />
+        </div>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div>
+        <label class="text-sm font-medium text-gray-600">
+            Description <span class="text-gray-400">(Optional)</span>
+        </label>
+
+        <textarea rows="4" placeholder="Share your requirements..." class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3 text-sm
+             focus:outline-none focus:ring-2 focus:ring-yellow-400 resize-none bg-gray-100">
+    </textarea>
+    </div>
+
+    <!-- WHATSAPP -->
+    <div class="flex items-center gap-2 text-sm text-gray-600">
+        <input type="checkbox" checked class="w-4 h-4 accent-yellow-400" />
+        <span>Receive Updates on Whatsapp</span>
+    </div>
+
+    <!-- INFO -->
+    <div class="flex gap-2 bg-gray-100 rounded-lg p-3 text-xs text-gray-600">
+        <span>🔒</span>
+        <p>
+            Your details are safe with us and will only be used to contact you
+            regarding your request.
+        </p>
+    </div>
+
+</mat-dialog-content>
+
+<!-- ACTION -->
+<mat-dialog-actions class="mt-4 px-0">
+    <button class="w-full rounded-full bg-yellow-400 hover:bg-yellow-500 transition
+           py-3 font-normal text-black text-sm sm:text-base">
+        Request a Call Back
+    </button>
+</mat-dialog-actions>

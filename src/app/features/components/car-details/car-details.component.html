@@ -1,0 +1,432 @@
+<div class="max-w-7xl mx-auto px-4 py-6">
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+
+        <!-- ================= LEFT SCROLLABLE ================= -->
+        <div class="lg:col-span-2 space-y-10">
+
+            <!-- IMAGE + THUMB -->
+            <div>
+                <div class="rounded-xl overflow-hidden h-[420px]">
+                    <ngx-slick-carousel #mainSlider="slick-carousel"
+                        class="main-slider h-[420px] rounded-xl overflow-hidden" [config]="mainConfig">
+                        <div ngxSlickItem *ngFor="let img of images">
+                            <img [src]="img" class="w-full h-[420px] object-cover" alt="car" />
+                        </div>
+                    </ngx-slick-carousel>
+                </div>
+
+                <div class="mt-3">
+                    <!-- THUMB SLIDER -->
+                    <ngx-slick-carousel #thumbSlider="slick-carousel" class="thumb-slider mt-3" [config]="thumbConfig">
+                        <div ngxSlickItem *ngFor="let img of images; let i = index" (click)="goToSlide(i)"
+                            class="cursor-pointer">
+                            <img [src]="img" class="h-20 w-full object-cover rounded-lg border
+             hover:border-yellow-400" />
+                        </div>
+                    </ngx-slick-carousel>
+                </div>
+            </div>
+
+            <!-- OVERVIEW -->
+            <div>
+                <h2 class="text-base font-medium text-gray-800 mb-4">
+                    Overview
+                </h2>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                    @for (item of overviewList; track $index) {
+                    <div class="bg-gray-50 rounded-xl p-4 text-center">
+                        <p class="text-sm font-medium text-gray-900">
+                            {{ item.value }}
+                        </p>
+                        <p class="text-xs text-gray-500 mt-1">
+                            {{ item.label }}
+                        </p>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div>
+                <h2 class="text-base font-medium text-gray-800 mb-4">
+                    Features
+                </h2>
+                <!-- SEARCH -->
+                <div class="mb-4 relative">
+                    <!-- INPUT -->
+                    <input type="text" [(ngModel)]="searchText"
+                        placeholder="Search for Features eg: Child Safety Lock, Hill Assistance etc" class="w-full border rounded-full pl-5 pr-11 py-3 text-sm
+           focus:outline-none focus:ring-2 focus:ring-gray-300" />
+
+                    <!-- SEARCH ICON (RIGHT) -->
+
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                        <img src="assets/common/Search.svg" class="w-5 h-5" />
+                    </span>
+                </div>
+
+
+                <div class="bg-white rounded-xl border grid grid-cols-1 md:grid-cols-4 min-h-[360px]">
+
+                    <!-- ================= LEFT CATEGORY ================= -->
+                    <div class="border-r p-4 space-y-2">
+                        <div *ngFor="let cat of categories" (click)="selectCategory(cat)"
+                            class="px-4 py-2 rounded-lg text-sm cursor-pointer transition" [ngClass]="
+          selectedCategory === cat
+          ? 'bg-gray-100 font-medium'
+          : 'text-gray-600 hover:bg-gray-50'
+        ">
+                            {{ cat }}
+                        </div>
+                    </div>
+
+                    <!-- ================= RIGHT FEATURES ================= -->
+                    <div class="md:col-span-3 p-4">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                            <div *ngFor="let item of filteredFeatures" class="bg-gray-50 rounded-xl p-4">
+                                <p class="text-sm font-semibold" [ngClass]="item.value === 'Yes'
+              ? 'text-green-600'
+              : 'text-gray-500'">
+                                    {{ item.value }}
+                                </p>
+
+                                <p class="text-xs text-gray-500 mt-1">
+                                    {{ item.label }}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- NO DATA -->
+                        <div *ngIf="filteredFeatures.length === 0" class="text-center text-gray-400 text-sm mt-10">
+                            No features found
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- SPECIFICATIONS -->
+            <div>
+                <!-- TITLE -->
+                <h2 class="text-lg font-medium text-gray-800 mb-3">
+                    Specifications
+                </h2>
+
+                <!-- SEARCH -->
+                <div class="mb-4 relative">
+                    <input type="text" [(ngModel)]="searchSpecifications"
+                        placeholder="Search for Specifications eg: Airbags, Mileage etc" class="w-full border rounded-full pl-5 pr-11 py-3 text-sm
+             focus:outline-none focus:ring-2 focus:ring-gray-300" />
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                        <img src="assets/common/Search.svg" class="w-5 h-5" />
+                    </span>
+                </div>
+
+                <!-- MAIN BOX -->
+                <div class="bg-white rounded-xl border grid grid-cols-1 md:grid-cols-4 min-h-[360px]">
+
+                    <!-- ================= LEFT ================= -->
+                    <div class="border-r p-4 space-y-2">
+                        <div *ngFor="let cat of categoriesSpecifications" (click)="selectSpecifications(cat)"
+                            class="px-4 py-2 rounded-lg text-sm cursor-pointer transition" [ngClass]="
+          selectedSpecifications === cat
+            ? 'bg-gray-100 font-medium'
+            : 'text-gray-600 hover:bg-gray-50'
+        ">
+                            {{ cat }}
+                        </div>
+                    </div>
+
+                    <!-- ================= RIGHT ================= -->
+                    <div class="md:col-span-3 p-4">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                            <div *ngFor="let item of filteredSpecs" class="bg-gray-50 rounded-xl p-4">
+                                <p class="text-sm font-medium text-gray-900">
+                                    {{ item.value }}
+                                </p>
+                                <p class="text-xs text-gray-500 mt-1">
+                                    {{ item.label }}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- NO DATA -->
+                        <div *ngIf="filteredSpecs.length === 0" class="text-center text-gray-400 text-sm mt-10">
+                            No specifications found
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- ASSURED -->
+            <div class="">
+
+                <!-- HEADER -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-2 text-gray-700 font-semibold">
+                        <img src="assets/common/Wrapper.svg" alt="">
+                    </div>
+
+                    <button
+                        class="bg-yellow-400 hover:bg-yellow-500 text-black text-sm px-4 py-2 rounded-full flex items-center gap-2">
+                        Download Full Report
+                        ⬇
+                    </button>
+                </div>
+
+                <!-- MAIN CARD -->
+                <div class="border rounded-2xl p-6 grid md:grid-cols-3 gap-6 bg-white">
+
+                    <!-- LEFT : OVERALL SCORE -->
+                    <div class="flex flex-col items-center justify-center md:border-r border-gray-200">
+                        <p class="text-gray-500 text-sm mb-4">
+                            CSX Overall Inspection Rating
+                        </p>
+
+                        <div class="relative w-40 h-40">
+                            <svg class="w-full h-full rotate-[-90deg]">
+                                <circle cx="80" cy="80" r="65" stroke="#e5e7eb" stroke-width="12" fill="none" />
+                                <circle cx="80" cy="80" r="65" stroke="#16a34a" stroke-width="12" fill="none"
+                                    stroke-linecap="round" stroke-dasharray="408" stroke-dashoffset="82" />
+                            </svg>
+
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-2xl font-semibold text-gray-700">8/10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT : SUB RATINGS -->
+                    <div class="md:col-span-2 grid sm:grid-cols-2 gap-4">
+
+                        <div class="rating-box bg-slate-100 p-3 rounded-md">
+                            <span>Core systems</span>
+                            <div class="mini-ring">8/10</div>
+                        </div>
+
+                        <div class="rating-box bg-slate-100 p-3 rounded-md">
+                            <span>Supporting systems</span>
+                            <div class="mini-ring">8/10</div>
+                        </div>
+
+                        <div class="rating-box bg-slate-100 p-3 rounded-md">
+                            <span>Interiors & AC</span>
+                            <div class="mini-ring">8/10</div>
+                        </div>
+
+                        <div class="rating-box bg-slate-100 p-3 rounded-md">
+                            <span>Exteriors & lights</span>
+                            <div class="mini-ring">8/10</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMI Calculator -->
+
+            <div class="">
+
+                <!-- TITLE -->
+                <h2 class="text-xl font-medium text-gray-800 mb-6">
+                    EMI Calculator
+                </h2>
+
+                <!-- MAIN CARD -->
+                <div class="bg-white border rounded-2xl p-6 grid md:grid-cols-3 gap-6">
+
+                    <!-- LEFT : EMI SUMMARY -->
+                    <div class="flex flex-col items-center md:border-r border-gray-200 pr-4">
+
+                        <p class="text-gray-600 mb-4">EMI Summary</p>
+
+                        <!-- CIRCLE -->
+                        <div class="relative w-44 h-44 mb-4">
+                            <svg class="w-full h-full rotate-[-90deg]">
+                                <circle cx="88" cy="88" r="72" stroke="#dcfce7" stroke-width="14" fill="none" />
+                                <circle cx="88" cy="88" r="72" stroke="#16a34a" stroke-width="14" fill="none"
+                                    stroke-linecap="round" stroke-dasharray="452" stroke-dashoffset="90" />
+                            </svg>
+
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                                <span class="text-2xl font-semibold">₹20,990</span>
+                                <span class="text-sm text-gray-500">per month</span>
+                            </div>
+                        </div>
+
+                        <!-- LEGEND -->
+                        <div class="w-full space-y-3 text-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-green-600"></span>
+                                    <span class="text-gray-600">Principle Loan amount</span>
+                                </div>
+                                <span>₹ 6,54,000</span>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-green-200"></span>
+                                    <span class="text-gray-600">Total Interest Payable</span>
+                                </div>
+                                <span>₹ 1,02,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT : CONTROLS -->
+                    <div class="md:col-span-2 space-y-8">
+
+                        <!-- LOAN AMOUNT -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm text-gray-700">Loan Amount</label>
+                                <span class="text-sm font-medium">₹ 6,54,000</span>
+                            </div>
+                            <input type="range" min="100000" max="1253000" value="654000"
+                                class="w-full accent-yellow-400">
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>₹1,00,000</span>
+                                <span>₹12,53,000</span>
+                            </div>
+                        </div>
+
+                        <!-- INTEREST RATE -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm text-gray-700">Interest Rate (%)</label>
+                                <span class="text-sm font-medium">10%</span>
+                            </div>
+                            <input type="range" min="0" max="30" value="10" class="w-full accent-yellow-400">
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>0</span>
+                                <span>30</span>
+                            </div>
+                        </div>
+
+                        <!-- DOWN PAYMENT -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm text-gray-700">Down Payment</label>
+                                <span class="text-sm font-medium">₹ 6,00,000</span>
+                            </div>
+                            <input type="range" min="100000" max="1253000" value="600000"
+                                class="w-full accent-yellow-400">
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>₹1,00,000</span>
+                                <span>₹12,53,000</span>
+                            </div>
+                        </div>
+
+                        <!-- DURATION -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm text-gray-700">Duration of Loan</label>
+                                <span class="text-sm font-medium">36 Months</span>
+                            </div>
+                            <input type="range" min="12" max="84" value="36" class="w-full accent-yellow-400">
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>12 Months</span>
+                                <span>84 Months</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= RIGHT STICKY ================= -->
+        <div class="lg:col-span-1 lg:sticky lg:top-24">
+            <div class="bg-gray-50 rounded-xl border p-5 space-y-4">
+
+                <h2 class="text-lg font-semibold">
+                    2023 Skoda Slavia Style 1.5 TSI DSG
+                </h2>
+
+                <div class="grid grid-cols-4 text-xs text-gray-600 bg-white border rounded-lg p-3">
+                    <div class="flex flex-col items-center">
+                        <img src="assets/common/user.svg" class="w-5 h-5 mb-1 opacity-70" />
+                        <p>1st Owner</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="assets/common/fuel.svg" class="w-5 h-5 mb-1 opacity-70" />
+                        <p>Petrol</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="assets/common/road.svg" class="w-5 h-5 mb-1 opacity-70" />
+                        <p>24000 Kms</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="assets/common/sarkit.svg" class="w-5 h-5 mb-1 opacity-70" />
+                        <p>AMT</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between pt-2">
+                    <img src="assets/common/Wrapper.svg" />
+                    <span class="text-xs text-gray-500 hover:underline cursor-pointer">
+                        Download Report
+                    </span>
+                </div>
+
+                <div class="flex justify-between items-center bg-white border rounded-lg p-3">
+                    <span class="text-sm text-gray-500">Inspection Rating</span>
+                    <span class="h-9 w-9 flex items-center justify-center rounded-full
+                   border-2 border-green-500 text-green-600 font-semibold text-sm">
+                        8/10
+                    </span>
+                </div>
+
+                <div>
+                    <p class="text-sm text-gray-400 line-through">₹ 13.99 Lakhs</p>
+                    <p class="text-2xl font-bold">₹ 12.49 Lakhs</p>
+                </div>
+
+                <div class="text-sm text-green-600">
+                    EMI starts 9.5%
+                    <div class="text-xl font-semibold text-black">₹ 12,455/m</div>
+                </div>
+
+                <button class="w-full bg-yellow-400 hover:bg-yellow-500
+                 py-3 rounded-full font-medium" (click)="request()">
+                    Request a Call Back
+                </button>
+
+                <button class="w-full border py-3 rounded-full text-gray-700" (click)="bookATest()">
+                    Book A Test Drive
+                </button>
+
+                <button class="relative w-full flex items-center justify-center gap-2
+         bg-gradient-to-r from-black via-gray-800 to-black
+         text-white py-3 rounded-full
+         font-medium text-sm overflow-hidden
+         shadow-[0_0_15px_rgba(250,204,21,0.35)]
+         hover:shadow-[0_0_25px_rgba(250,204,21,0.6)]
+         hover:scale-[1.02]
+         transition-all duration-300"
+         (click)="askAI()">
+                    <!-- ✨ SHINE LAYER -->
+                    <span class="absolute inset-0
+           bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent
+           translate-x-[-100%] animate-shine"></span>
+
+                    <span class="relative text-yellow-400 animate-pulse">✨</span>
+                    <span class="relative">Ask AI – Is this a good deal?</span>
+                </button>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

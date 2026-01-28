@@ -1,0 +1,29 @@
+ <div *ngFor="let item of faq; let i = index" class="border-b border-gray-300 py-4">
+
+    <!-- QUESTION ROW -->
+    <button 
+      (click)="toggle(i)"
+      class="w-full flex items-center justify-between text-left"
+    >
+      <span class="text-lg font-medium text-gray-800">
+        {{ item.question }}
+      </span>
+
+      <!-- ARROW -->
+      <span 
+        class="transform transition-transform duration-950"
+        [ngClass]="openedIndex === i ? 'rotate-180' : 'rotate-0'"
+      >
+        <img src="assets/common/ArrowDown.svg" alt="">
+      </span>
+    </button>
+
+    <!-- ANSWER -->
+    <div 
+      *ngIf="openedIndex === i"
+      class="mt-3 text-gray-600 text-base animate-accordion"
+    >
+      {{ item.answer }}
+    </div>
+
+  </div>

@@ -1,0 +1,98 @@
+<h2 class="text-xl sm:text-2xl font-semibold mb-8">
+    Best Deals on Preowned Cars
+</h2>
+
+<app-filter-bar
+  [categories]="categories"
+  [selectedCategory]="selectedCategory"
+  [searchText]="searchText"
+  (searchChange)="searchText = $event"
+  (categoryChange)="selectCategory($event)"
+  (sortClick)="sortCars()"
+  (fuelClick)="openFuelFilter()">
+</app-filter-bar>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+  <!-- LEFT FILTER PANEL (NO COMPONENT) -->
+  <div class="md:col-span-1 border rounded-2xl p-5 bg-white shadow-sm">
+
+    <h2 class="text-lg font-semibold mb-4">Filters</h2>
+
+    <!-- PRICE RANGE -->
+    <div class="mb-6">
+      <h3 class="font-medium mb-2 text-sm">Price Range</h3>
+
+      <input 
+        type="range" 
+        [(ngModel)]="minPrice"
+        min="40000" max="6000000"
+        class="w-full accent-yellow-500"
+        (change)="filterCars()"
+      />
+
+      <div class="flex justify-between text-xs text-gray-500 mt-2">
+        <span>{{ minPrice }}</span>
+        <span>{{ maxPrice }}+</span>
+      </div>
+
+      <div class="flex justify-between text-xs text-gray-400 mt-1">
+        <span>Min</span>
+        <span>Max</span>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- BRAND FILTER -->
+    <div>
+      <h3 class="font-medium mb-2 text-sm">Brand + Model</h3>
+
+      <div *ngFor="let b of brands" class="flex items-center gap-2 mb-2">
+        <input 
+          type="checkbox" 
+          [value]="b" 
+          (change)="toggleBrand(b)"
+          class="w-4 h-4 border-gray-400"
+        />
+        <label class="text-sm text-gray-700">{{ b }}</label>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- YEAR FILTER -->
+    <div>
+      <h3 class="font-medium mb-2 text-sm">Year</h3>
+
+      <div *ngFor="let y of years" class="flex items-center gap-2 mb-2">
+        <input 
+          type="checkbox" 
+          [value]="y" 
+          (change)="toggleYear(y)"
+          class="w-4 h-4 border-gray-400"
+        />
+        <label class="text-sm text-gray-700">{{ y }}</label>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE CAR CARD GRID -->
+  <div class="md:col-span-3">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <app-car-card
+        *ngFor="let car of filteredCars"
+        [car]="car"
+        (callBack)="openCallPopup(car)">
+      </app-car-card>
+
+    </div>
+
+  </div>
+
+</div>
+
+ 
