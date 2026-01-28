@@ -1,0 +1,81 @@
+<!-- TITLE WRAPPER -->
+<div class="relative flex items-center justify-center">
+
+    <!-- TITLE -->
+    <h2 mat-dialog-title class="w-full text-center font-semibold text-lg sm:text-xl">
+        Get Your Car Report
+    </h2>
+
+    <!-- CLOSE BUTTON -->
+    <button mat-dialog-close class="absolute right-5 top-[55%] -translate-y-1/2
+           text-gray-400 hover:text-black transition text-xl" aria-label="Close dialog">
+        ✕
+    </button>
+
+</div>
+
+<!-- SUBTITLE -->
+<p class="text-sm text-gray-500 text-center px-2 sm:px-6 ">
+    Share your details to receive your detailed car report instantly. The report will be sent to you via WhatsApp and email.
+</p>
+
+<!-- ================= DIALOG CONTENT ================= -->
+<mat-dialog-content class="px-5 py-6 space-y-5">
+
+    <form [formGroup]="form" class="space-y-5">
+
+        <!-- NAME -->
+        <div>
+            <label class="text-sm font-medium text-gray-600">Name*</label>
+            <input type="text" formControlName="name" placeholder="Enter Your Name" class="mt-1 w-full rounded-full border border-gray-300 px-4 py-3 text-sm
+               bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+        </div>
+
+        <!-- MOBILE -->
+        <div>
+            <label class="text-sm font-medium text-gray-600">Mobile Number*</label>
+            <div class="mt-1 flex items-center rounded-full border border-gray-300 px-4 py-3
+               bg-white focus-within:ring-2 focus-within:ring-yellow-400">
+
+                <span class="text-gray-500 text-sm pr-3 border-r">+91</span>
+
+                <input type="tel" formControlName="mobile" placeholder="Enter Mobile Number"
+                    class="ml-3 w-full text-sm outline-none bg-transparent" />
+            </div>
+        </div>
+
+        <!-- EMAIL -->
+        <div>
+            <label class="text-sm font-medium text-gray-600">Email Id*</label>
+            <input type="email" formControlName="email" placeholder="Enter Your Email" class="mt-1 w-full rounded-full border border-gray-300 px-4 py-3 text-sm
+               bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+        </div>
+
+        <!-- WHATSAPP -->
+        <div class="flex items-center gap-3 text-sm text-gray-600">
+            <input type="checkbox" formControlName="whatsapp" class="w-4 h-4 accent-yellow-400" />
+            <span>Receive Updates on Whatsapp</span>
+        </div>
+
+    </form>
+
+    <!-- INFO BAR -->
+    <div class="flex items-start gap-2 bg-gray-100 rounded-lg p-3 text-xs text-gray-600">
+        <span class="mt-0.5">🔒</span>
+        <p>
+            Your details are safe with us and will only be used to contact you
+            regarding your request.
+        </p>
+    </div>
+
+</mat-dialog-content>
+
+<!-- ================= DIALOG ACTION ================= -->
+<mat-dialog-actions class="px-5 pb-5">
+    <button (click)="submit()" [disabled]="form.invalid" class="w-full rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500
+           hover:from-yellow-500 hover:to-yellow-600 transition
+           py-3 font-semibold text-black text-sm sm:text-base
+           disabled:opacity-50 disabled:cursor-not-allowed">
+        Download Report
+    </button>
+</mat-dialog-actions>

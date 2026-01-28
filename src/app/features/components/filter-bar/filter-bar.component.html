@@ -1,0 +1,51 @@
+<div class="flex flex-wrap items-center gap-3 mb-4">
+
+  <!-- SEARCH BAR -->
+  <div class="flex-grow min-w-[250px] relative">
+    <input 
+      type="text"
+      [ngModel]="searchText"
+      (ngModelChange)="onSearchChange($event)"
+      placeholder="Search for cars eg: Slavia, Polo"
+      class="w-full pl-5 pr-12 py-3 rounded-full border border-gray-300
+             focus:ring-2 focus:ring-black/20 outline-none"
+    />
+
+    <img src="assets/common/Search.svg"
+         class="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 opacity-60" />
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="flex items-center bg-white border border-gray-200 py-2 px-2 rounded-full overflow-hidden flex-shrink-0">
+    <button
+      *ngFor="let c of categories"
+      (click)="selectCategory(c)"
+      class="px-4 py-1.5 rounded-full text-sm font-medium transition-all flex-shrink-0"
+      [ngClass]="selectedCategory === c ? 'text-white shadow' : 'text-gray-500'"
+      [style.background]="selectedCategory === c 
+        ? 'linear-gradient(135deg, #2E2E2E, #343434, #737373)' 
+        : 'transparent'"
+    >
+      {{ c }}
+    </button>
+  </div>
+
+  <!-- SORT BUTTON -->
+  <button 
+    class="px-6 py-3 rounded-full border border-gray-300 flex items-center gap-2 flex-shrink-0"
+    (click)="sortClick.emit()"
+  >
+    <img src="assets/common/sort-v.svg" alt="">
+    Sort by
+  </button>
+
+  <!-- FUEL TYPE -->
+  <button 
+    class="px-6 py-3 rounded-full border border-gray-300 flex items-center gap-2 flex-shrink-0"
+    (click)="fuelClick.emit()"
+  >
+    Fuel Type
+    <img src="assets/common/downArrow.svg" alt="">
+  </button>
+
+</div>

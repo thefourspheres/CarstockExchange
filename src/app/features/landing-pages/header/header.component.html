@@ -1,0 +1,65 @@
+<header
+  class="w-full border-b border-gray-300 bg-white fixed top-0 left-0 right-0 z-50 transition-transform duration-300"
+  [ngClass]="isHidden ? '-translate-y-full' : 'translate-y-0'"
+>
+  <div class="max-w-7xl mx-auto flex items-center justify-between py-3 px-4">
+
+    <!-- LOGO -->
+    <img src="assets/header/headerLogo.svg" alt="Logo" class="h-7" />
+
+    <!-- DESKTOP NAV -->
+    <nav class="hidden md:flex items-center space-x-8 text-sm text-gray-700">
+      <a (click)="scrollToSection('home')" class="cursor-pointer hover:text-black">Home</a>
+      <a (click)="scrollToSection('howItWorks')" class="cursor-pointer hover:text-black">Carservix</a>
+      <a (click)="scrollToSection('about')" class="cursor-pointer hover:text-black">About us</a>
+    </nav>
+
+    <!-- RIGHT DESKTOP -->
+    <div class="hidden md:flex items-center space-x-6 text-sm text-gray-700">
+      <span>📍 Pune</span>
+      <a class="hover:text-black">Become A Partner</a>
+      <span>Call us: <b>9876543322</b></span>
+    </div>
+
+    <!-- 🍔 HAMBURGER (MOBILE) -->
+    <button
+      class="md:hidden flex flex-col gap-1"
+      (click)="toggleMenu()"
+    >
+      <span class="w-6 h-[2px] bg-black transition"
+        [ngClass]="isMenuOpen ? 'rotate-45 translate-y-1.5' : ''"></span>
+      <span class="w-6 h-[2px] bg-black transition"
+        [ngClass]="isMenuOpen ? 'opacity-0' : ''"></span>
+      <span class="w-6 h-[2px] bg-black transition"
+        [ngClass]="isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''"></span>
+    </button>
+  </div>
+
+  <!-- 📱 MOBILE MENU -->
+  <div
+    class="md:hidden bg-white border-t border-gray-200 overflow-hidden transition-all duration-300"
+    [ngClass]="isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
+  >
+    <div class="flex flex-col px-6 py-4 space-y-4 text-sm text-gray-700">
+      <a (click)="scrollToSection('home')" class="hover:text-black">Home</a>
+      <a (click)="scrollToSection('howItWorks')" class="hover:text-black">Carservix</a>
+      <a (click)="scrollToSection('about')" class="hover:text-black">About us</a>
+
+      <hr>
+
+      <span>📍 Pune</span>
+      <a class="hover:text-black">Become A Partner</a>
+      <span>Call us: <b>9876543322</b></span>
+    </div>
+  </div>
+</header>
+
+  <button 
+  *ngIf="showScrollTop"
+  (click)="scrollToSection('home')"
+  class="border border-gray-500 rounded-full px-4 py-4
+         transition fixed right-5 bottom-5 z-[999]
+         bg-transparent shadow-lg"
+>
+  <img src="assets/common/ArrowDown.svg" class="rotate-180 h-5 w-5 " alt="">
+</button>
